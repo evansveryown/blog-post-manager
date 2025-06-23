@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Post Manager</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="post-list" class="sidebar"></div>
+
+    <div id="post-detail" class="main">
+      <h2>Select a post to view details</h2>
+    </div>
+  </div>
+
+  <form id="new-post-form">
+    <h3>Add New Post</h3>
+    <input type="text" id="new-title" placeholder="Title" required />
+    <textarea id="new-content" placeholder="Content" required></textarea>
+    <input type="text" id="new-author" placeholder="Author" required />
+    <button type="submit">Add Post</button>
+  </form>
+
+  <form id="edit-post-form" class="hidden">
+    <h4>Update Post Details</h4>
+    <input type="text" id="edit-title" />
+    <textarea id="edit-content" rows="5"></textarea>
+    <button type="submit">Update Post</button>
+    <button type="button" id="cancel-edit">Cancel</button>
+  </form>
+
+  <script src="src/index.js"></script>
+</body>
+</html>
