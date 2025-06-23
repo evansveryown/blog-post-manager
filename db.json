@@ -3,14 +3,26 @@
     {
       "id": 1,
       "title": "First Blog Post",
-      "content": "This is the first post content.",
+      "content": "This is blog post number 1",
       "author": "Cassy"
     },
     {
       "id": 2,
-      "title": "Another Entry",
-      "content": "Welcome to another blog post!",
-      "author": "Sparks"
+      "title": "Second blog post",
+      "content": "This is blog post number 2",
+      "author": "Evans"
+    },
+    {
+      "id": "d708",
+      "title": "Test",
+      "content": "Test",
+      "author": "Test"
+    },
+    {
+      "id": "056e",
+      "title": "Test",
+      "content": "Test2",
+      "author": "Test3"
     }
   ]
 }

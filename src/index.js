@@ -21,7 +21,7 @@ function displayPosts() {
       });
 
       if (posts.length > 0) {
-        handlePostClick(posts[0].id); // Advanced: show first post on load
+        handlePostClick(posts[0].id); 
       }
     });
 }
