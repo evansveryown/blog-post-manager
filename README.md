@@ -17,6 +17,33 @@ By **Cassy Omondi**
 - Delete a post from the list
 - All interactions are synced with the mock API in real time
 
+## Environments Supported
+
+This project supports **two operating modes**:
+
+### GitHub Pages (Read-Only Mode)
+- Blog posts are fetched from a static `db.json` file hosted on GitHub.
+- **No** add, edit, or delete operations are allowed.
+- Useful for public demos or viewing the app in action.
+
+### Local JSON Server (Full CRUD)
+- Uses [`json-server`](https://www.npmjs.com/package/json-server) to simulate a real API.
+- Supports **Create, Read, Update, Delete** operations.
+- Ideal for development and testing.
+
+### Switching Modes
+
+To toggle between the two modes:
+
+1. Open `src/index.js`
+2. Locate the following section at the top:
+   ```javascript
+   const baseURL = "https://evansveryown.github.io/blog-post-manager/db.json";
+   // const baseURL = "http://localhost:3000/posts";
+3. Comment/uncomment as needed:
+- Use the GitHub URL for read-only
+- Use the localhost URL for full CRUD with json-server
+
 ## How to Use
 
 ### Requirements

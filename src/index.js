@@ -1,15 +1,45 @@
-// To fetch json from local json file (db.json) use const baseURL = "http://localhost:3000/posts";
 
-const baseURL = "http://localhost:3000/posts";
+const baseURL = "https://evansveryown.github.io/blog-post-manager/db.json"; 
+
+// const baseURL = "http://localhost:3000/posts"; 
 
 document.addEventListener("DOMContentLoaded", main);
 
 function main() {
-  displayPosts();
+  //To fetch data from github pages server use display_Posts_from_github_pages_url (Doesn't support CRUD)
+  display_Posts_from_github_pages_url();
+  
+  //To fetch data from local json server use display_Posts_from_local_json
+  
+  // display_Posts_from_local_json();
+
   addNewPostListener();
 }
 
-function displayPosts() {
+function display_Posts_from_github_pages_url() {
+  fetch(baseURL)
+    .then((res) => res.json())
+    .then((data) => {
+      const posts = data.posts; 
+
+      const postList = document.getElementById("post-list");
+      postList.innerHTML = "";
+
+      posts.forEach((post) => {
+        const div = document.createElement("div");
+        div.textContent = post.title;
+        div.addEventListener("click", () => handlePostClick(post.id, posts)); // pass posts
+        postList.appendChild(div);
+      });
+
+      if (posts.length > 0) {
+        handlePostClick(posts[0].id, posts); 
+      }
+    });
+}
+
+
+function display_Posts_from_local_json() {
   fetch(baseURL)
     .then((res) => res.json())
     .then((posts) => {
@@ -66,7 +96,7 @@ function addNewPostListener() {
     })
       .then((res) => res.json())
       .then(() => {
-        displayPosts();
+        display_Posts_from_local_json();
         form.reset();
       });
   });
@@ -96,7 +126,7 @@ document.getElementById("edit-post-form").addEventListener("submit", (e) => {
   })
     .then((res) => res.json())
     .then(() => {
-      displayPosts();
+      display_Posts_from_local_json();
       document.getElementById("edit-post-form").classList.add("hidden");
     });
 });
@@ -104,7 +134,7 @@ document.getElementById("edit-post-form").addEventListener("submit", (e) => {
 function deletePost(id) {
   fetch(`${baseURL}/${id}`, { method: "DELETE" })
     .then(() => {
-      displayPosts();
+      display_Posts_from_local_json();
       document.getElementById("post-detail").innerHTML = `<h2>Select a post to view details</h2>`;
     });
 }
