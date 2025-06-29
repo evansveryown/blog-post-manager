@@ -1,3 +1,5 @@
+// To fetch json from local json file (db.json) use const baseURL = "http://localhost:3000/posts";
+
 const baseURL = "http://localhost:3000/posts";
 
 document.addEventListener("DOMContentLoaded", main);
