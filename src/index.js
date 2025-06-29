@@ -1,17 +1,16 @@
 
 const baseURL = "https://evansveryown.github.io/blog-post-manager/db.json"; 
 
-// const baseURL = "http://localhost:3000/posts"; 
+//const baseURL = "http://localhost:3000/posts"; 
 
 document.addEventListener("DOMContentLoaded", main);
 
 function main() {
-  //To fetch data from github pages server use display_Posts_from_github_pages_url (Doesn't support CRUD)
+  //**** To fetch data from github pages server ****
   display_Posts_from_github_pages_url();
   
-  //To fetch data from local json server use display_Posts_from_local_json
-  
-  // display_Posts_from_local_json();
+  //**** To fetch data from local json server ****
+  //display_Posts_from_local_json(); // remember to activate json server (npx json-server db.json)
 
   addNewPostListener();
 }
