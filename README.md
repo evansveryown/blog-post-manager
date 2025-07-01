@@ -14,35 +14,19 @@ By **Cassy Omondi**
 - Click a post to view full details (title, content, author)
 - Add a new blog post using a form
 - Edit an existing post's title and content
-- Delete a post from the list
-- All interactions are synced with the mock API in real time
+- Delete a post
+- All actions are synced in real time with the remote JSON server
 
-## Environments Supported
+## Backend API
 
-This project supports **two operating modes**:
+This app uses a [JSON Server](https://www.npmjs.com/package/json-server) deployed to Render:
 
-### GitHub Pages (Read-Only Mode)
-- Blog posts are fetched from a static `db.json` file hosted on GitHub.
-- **No** add, edit, or delete operations are allowed.
-- Useful for public demos or viewing the app in action.
+> `https://json-server-blog-backend.onrender.com/posts`
 
-### Local JSON Server (Full CRUD)
-- Uses [`json-server`](https://www.npmjs.com/package/json-server) to simulate a real API.
-- Supports **Create, Read, Update, Delete** operations.
-- Ideal for development and testing.
+The backend is powered by a simple `db.json` file.  
+All create, read, update, and delete requests are processed through this API.
 
-### Switching Modes
-
-To toggle between the two modes:
-
-1. Open `src/index.js`
-2. Locate the following section at the top:
-   ```javascript
-   const baseURL = "https://evansveryown.github.io/blog-post-manager/db.json";
-   // const baseURL = "http://localhost:3000/posts";
-3. Comment/uncomment as needed:
-- Use the GitHub URL for read-only
-- Use the localhost URL for full CRUD with json-server
+---
 
 ## How to Use
 
@@ -62,19 +46,14 @@ Or download the ZIP and extract it.
 cd blog-post-manager
 ```
 
-#### 3. Install JSON Server globally (if not already installed)
-npm install -g json-server
-
-#### 4. Start the local JSON server
-```bash
-json-server db.json
-This starts the API at http://localhost:3000/posts.
-```
-
-#### 5. Start the frontend
+#### 3. Start the frontend
 If you have Live Server installed (e.g., in VS Code):
 
-Right-click index.html and choose "Open with Live Server"
+Right-click index.html and select:
+
+"Open with Live Server"
+
+The app will launch in your browser and fetch data from the remote Render API.
 
  --- 
  

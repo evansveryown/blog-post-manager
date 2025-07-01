@@ -1,49 +1,19 @@
-
-const baseURL = "https://evansveryown.github.io/blog-post-manager/db.json"; 
-
-//const baseURL = "http://localhost:3000/posts"; 
+const baseURL = "https://json-server-blog-backend.onrender.com/posts"; 
 
 document.addEventListener("DOMContentLoaded", main);
 
 function main() {
-  //**** To fetch data from github pages server ****
-  display_Posts_from_github_pages_url();
-  
-  //**** To fetch data from local json server ****
-  //display_Posts_from_local_json(); // remember to activate json server (npx json-server db.json)
-
+  display_Posts_from_render_server();
   addNewPostListener();
 }
 
-function display_Posts_from_github_pages_url() {
-  fetch(baseURL)
-    .then((res) => res.json())
-    .then((data) => {
-      const posts = data.posts; 
-
-      const postList = document.getElementById("post-list");
-      postList.innerHTML = "";
-
-      posts.forEach((post) => {
-        const div = document.createElement("div");
-        div.textContent = post.title;
-        div.addEventListener("click", () => handlePostClick(post.id, posts)); // pass posts
-        postList.appendChild(div);
-      });
-
-      if (posts.length > 0) {
-        handlePostClick(posts[0].id, posts); 
-      }
-    });
-}
-
-
-function display_Posts_from_local_json() {
+function display_Posts_from_render_server() {
   fetch(baseURL)
     .then((res) => res.json())
     .then((posts) => {
       const postList = document.getElementById("post-list");
       postList.innerHTML = "";
+
       posts.forEach((post) => {
         const div = document.createElement("div");
         div.textContent = post.title;
@@ -52,8 +22,11 @@ function display_Posts_from_local_json() {
       });
 
       if (posts.length > 0) {
-        handlePostClick(posts[0].id); 
+        handlePostClick(posts[0].id);
       }
+    })
+    .catch((err) => {
+      console.error("Failed to fetch posts:", err);
     });
 }
 
@@ -74,6 +47,9 @@ function handlePostClick(id) {
       document.getElementById("edit-content").value = post.content;
 
       document.getElementById("edit-post-form").dataset.id = post.id;
+    })
+    .catch((err) => {
+      console.error(`Failed to fetch post ${id}:`, err);
     });
 }
 
@@ -95,8 +71,11 @@ function addNewPostListener() {
     })
       .then((res) => res.json())
       .then(() => {
-        display_Posts_from_local_json();
+        display_Posts_from_render_server();
         form.reset();
+      })
+      .catch((err) => {
+        console.error("Failed to add new post:", err);
       });
   });
 }
@@ -125,15 +104,21 @@ document.getElementById("edit-post-form").addEventListener("submit", (e) => {
   })
     .then((res) => res.json())
     .then(() => {
-      display_Posts_from_local_json();
+      display_Posts_from_render_server();
       document.getElementById("edit-post-form").classList.add("hidden");
+    })
+    .catch((err) => {
+      console.error(`Failed to update post ${id}:`, err);
     });
 });
 
 function deletePost(id) {
   fetch(`${baseURL}/${id}`, { method: "DELETE" })
     .then(() => {
-      display_Posts_from_local_json();
+      display_Posts_from_render_server();
       document.getElementById("post-detail").innerHTML = `<h2>Select a post to view details</h2>`;
+    })
+    .catch((err) => {
+      console.error(`Failed to delete post ${id}:`, err);
     });
 }
